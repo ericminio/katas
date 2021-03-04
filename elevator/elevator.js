@@ -30,7 +30,7 @@ class Elevator {
 
         this.floor += this.state == 'up' ? 1 : -1
         this.maybeOpen()
-        this.continue()
+        this.thenWhat()
     }
     maybeOpen() {
         let calls = this.state == 'up' ? this.goingupcalls : this.goingdowncalls
@@ -40,7 +40,7 @@ class Elevator {
             calls.splice(index, 1)
         }
     }
-    continue() {
+    thenWhat() {
         if (this.goingdowncalls.length == 0 && this.goingupcalls.length == 0) {
             this.state = 'waiting'
         }
