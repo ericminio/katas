@@ -17,7 +17,7 @@ describe('elevator', ()=>{
         elevator.calledFrom(2)
         elevator.calledFrom(4)
 
-        expect(elevator.goingupcalls).to.deep.equal([2, 4])
+        expect(elevator.ups).to.deep.equal([2, 4])
     })
     it('distinguishes direction', ()=>{
         elevator.floor = 4
@@ -26,8 +26,8 @@ describe('elevator', ()=>{
         elevator.calledFrom(1)
         elevator.calledFrom(0)
 
-        expect(elevator.goingupcalls).to.deep.equal([10, 8])
-        expect(elevator.goingdowncalls).to.deep.equal([1, 0])
+        expect(elevator.ups).to.deep.equal([10, 8])
+        expect(elevator.downs).to.deep.equal([1, 0])
     })
     it('will go up when first call is above current', ()=>{
         elevator.floor = 4
@@ -63,16 +63,16 @@ describe('elevator', ()=>{
 
         elevator.move()
         expect(elevator.floor).to.equal(3)
-        expect(elevator.goingdowncalls).to.deep.equal([2])
+        expect(elevator.downs).to.deep.equal([2])
         expect(elevator.state).to.equal('down')
         elevator.move()
         expect(elevator.floor).to.equal(2)
-        expect(elevator.goingdowncalls).to.deep.equal([])
+        expect(elevator.downs).to.deep.equal([])
         expect(elevator.state).to.equal('waiting')
 
         elevator.move()
         expect(elevator.floor).to.equal(2)
-        expect(elevator.goingdowncalls).to.deep.equal([])
+        expect(elevator.downs).to.deep.equal([])
         expect(elevator.state).to.equal('waiting')
     })
     it('clears both directions', ()=>{
@@ -82,34 +82,34 @@ describe('elevator', ()=>{
 
         elevator.move()
         expect(elevator.floor).to.equal(3)
-        expect(elevator.goingdowncalls).to.deep.equal([2])
-        expect(elevator.goingupcalls).to.deep.equal([5])
+        expect(elevator.downs).to.deep.equal([2])
+        expect(elevator.ups).to.deep.equal([5])
         expect(elevator.state).to.equal('down')
         elevator.move()
         expect(elevator.floor).to.equal(2)
-        expect(elevator.goingdowncalls).to.deep.equal([])
-        expect(elevator.goingupcalls).to.deep.equal([5])
+        expect(elevator.downs).to.deep.equal([])
+        expect(elevator.ups).to.deep.equal([5])
         expect(elevator.state).to.equal('up')
         elevator.move()
         expect(elevator.floor).to.equal(3)
-        expect(elevator.goingdowncalls).to.deep.equal([])
-        expect(elevator.goingupcalls).to.deep.equal([5])
+        expect(elevator.downs).to.deep.equal([])
+        expect(elevator.ups).to.deep.equal([5])
         expect(elevator.state).to.equal('up')
         elevator.move()
         expect(elevator.floor).to.equal(4)
-        expect(elevator.goingdowncalls).to.deep.equal([])
-        expect(elevator.goingupcalls).to.deep.equal([5])
+        expect(elevator.downs).to.deep.equal([])
+        expect(elevator.ups).to.deep.equal([5])
         expect(elevator.state).to.equal('up')
         elevator.move()
         expect(elevator.floor).to.equal(5)
-        expect(elevator.goingdowncalls).to.deep.equal([])
-        expect(elevator.goingupcalls).to.deep.equal([])
+        expect(elevator.downs).to.deep.equal([])
+        expect(elevator.ups).to.deep.equal([])
         expect(elevator.state).to.equal('waiting')
     })
     it('ignores calls from current floor', ()=>{
         elevator.calledFrom(0)
-        expect(elevator.goingdowncalls).to.deep.equal([])
-        expect(elevator.goingupcalls).to.deep.equal([])
+        expect(elevator.downs).to.deep.equal([])
+        expect(elevator.ups).to.deep.equal([])
 
         elevator.move()
         expect(elevator.floor).to.equal(0)
@@ -182,8 +182,8 @@ describe('elevator', ()=>{
     })
     it('ignores floor request to current floor', ()=>{
         elevator.request(0)
-        expect(elevator.goingdowncalls).to.deep.equal([])
-        expect(elevator.goingupcalls).to.deep.equal([])
+        expect(elevator.downs).to.deep.equal([])
+        expect(elevator.ups).to.deep.equal([])
 
         elevator.move()
         expect(elevator.floor).to.equal(0)

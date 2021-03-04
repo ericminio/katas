@@ -2,8 +2,8 @@ class Elevator {
     constructor() {
         this.floor = 0
         this.state = 'waiting'
-        this.goingupcalls = []
-        this.goingdowncalls = []
+        this.ups = []
+        this.downs = []
         this.listener = ()=>{}
     }
     ding() {
@@ -14,12 +14,12 @@ class Elevator {
     }
     request(floor) {
         if (floor > this.floor) {
+            this.ups.push(floor)
             if (this.state == 'waiting') { this.state = 'up' }
-            this.goingupcalls.push(floor)
         }
         else if (floor < this.floor) {
+            this.downs.push(floor)
             if (this.state == 'waiting') { this.state = 'down' }
-            this.goingdowncalls.push(floor)
         }   
         else {
             this.ding()
@@ -33,7 +33,7 @@ class Elevator {
         this.thenWhat()
     }
     maybeOpen() {
-        let calls = this.state == 'up' ? this.goingupcalls : this.goingdowncalls
+        let calls = this.state == 'up' ? this.ups : this.downs
         let index = calls.indexOf(this.floor)
         if (index != -1) {
             this.ding()
@@ -41,13 +41,13 @@ class Elevator {
         }
     }
     thenWhat() {
-        if (this.goingdowncalls.length == 0 && this.goingupcalls.length == 0) {
+        if (this.downs.length == 0 && this.ups.length == 0) {
             this.state = 'waiting'
         }
-        if (this.goingdowncalls.length == 0 && this.goingupcalls.length != 0) {
+        if (this.downs.length == 0 && this.ups.length != 0) {
             this.state = 'up'
         }
-        if (this.goingdowncalls.length != 0 && this.goingupcalls.length == 0) {
+        if (this.downs.length != 0 && this.ups.length == 0) {
             this.state = 'down'
         } 
     }
