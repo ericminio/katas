@@ -116,7 +116,7 @@ describe('elevator', ()=>{
     })
     it('dings', ()=>{
         let dings = []
-        elevator.ding = (floor)=>{
+        elevator.listener = (floor)=>{
             dings.push(floor)
         }
         elevator.calledFrom(2)
@@ -126,7 +126,7 @@ describe('elevator', ()=>{
     })
     it('dings immediatly when already there', ()=>{
         let dings = []
-        elevator.ding = (floor)=>{
+        elevator.listener = (floor)=>{
             dings.push(floor)
         }
         elevator.calledFrom(0)
@@ -134,7 +134,7 @@ describe('elevator', ()=>{
     })
     it('accept floor request', ()=>{
         let dings = []
-        elevator.ding = (floor)=>{
+        elevator.listener = (floor)=>{
             dings.push(floor)
         }
         elevator.calledFrom(1)
@@ -147,7 +147,7 @@ describe('elevator', ()=>{
     })
     it('accept interupting floor request', ()=>{
         let dings = []
-        elevator.ding = (floor)=>{
+        elevator.listener = (floor)=>{
             dings.push(floor)
         }
         elevator.calledFrom(4)
@@ -163,7 +163,7 @@ describe('elevator', ()=>{
     })
     it('postpone too-late floor request', ()=>{
         let dings = []
-        elevator.ding = (floor)=>{
+        elevator.listener = (floor)=>{
             dings.push(floor)
         }
         elevator.calledFrom(4)
@@ -187,5 +187,13 @@ describe('elevator', ()=>{
 
         elevator.move()
         expect(elevator.floor).to.equal(0)
+    })
+    it('ignores floor request to current floor, but still dings!', ()=>{
+        let dings = []
+        elevator.listener = (floor)=>{
+            dings.push(floor)
+        }
+        elevator.request(0)
+        expect(dings).to.deep.equal([0])
     })
 })
