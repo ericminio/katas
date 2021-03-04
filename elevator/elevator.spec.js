@@ -1,7 +1,7 @@
 let { expect } = require('chai')
 let { Elevator } = require('./elevator')
 
-describe('elevator', ()=>{
+describe.only('elevator', ()=>{
 
     let elevator
     beforeEach(()=>{

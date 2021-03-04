@@ -29,14 +29,19 @@ class Elevator {
         if (this.state == 'waiting') { return }
 
         this.floor += this.state == 'up' ? 1 : -1
-    
-        let calls = this.state == 'down' ? this.goingdowncalls : this.goingupcalls
-        let call = calls.indexOf(this.floor)
+
+        this.maybeOpen()
+        this.continue()
+    }
+    maybeOpen() {
+        let calls = this.state == 'up' ? this.goingupcalls : this.goingdowncalls
+        let call  = calls.indexOf(this.floor)
         if (call != -1) {
-            calls.splice(call, 1)
             this.ding()
+            calls.splice(call, 1)
         }
-    
+    }
+    continue() {
         if (this.goingdowncalls.length == 0 && this.goingupcalls.length == 0) {
             this.state = 'waiting'
         }
@@ -45,7 +50,7 @@ class Elevator {
         }
         if (this.goingdowncalls.length != 0 && this.goingupcalls.length == 0) {
             this.state = 'down'
-        }    
+        } 
     }
 }
 
