@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha *.spec.js elevator/*.spec.js string.calculator/*.spec.js"
+    "test": "mocha './{,!(node_modules)/**}/*.spec.js'"
   },
   "author": "",
   "license": "ISC",
