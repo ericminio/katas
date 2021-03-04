@@ -17,7 +17,7 @@ Elevator.prototype.request = function(floor) {
         if (this.state == 'waiting') { this.state = 'up' }
         this.goingupcalls.push(floor)
     }
-    else {
+    else if (floor < this.floor) {
         if (this.state == 'waiting') { this.state = 'down' }
         this.goingdowncalls.push(floor)
     }

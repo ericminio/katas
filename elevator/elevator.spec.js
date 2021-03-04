@@ -180,4 +180,12 @@ describe('elevator', ()=>{
         expect(elevator.floor).to.equal(1)
         expect(dings).to.deep.equal([2, 4, 1])
     })
+    it('ignores floor request to current floor', ()=>{
+        elevator.request(0)
+        expect(elevator.goingdowncalls).to.deep.equal([])
+        expect(elevator.goingupcalls).to.deep.equal([])
+
+        elevator.move()
+        expect(elevator.floor).to.equal(0)
+    })
 })
