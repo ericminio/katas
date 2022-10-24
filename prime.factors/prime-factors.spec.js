@@ -9,3 +9,10 @@ describe.only('prime factors decomposition', () => {
         });
     });
 });
+
+const primeFactorsOf = () => {
+    return {
+        number: 64,
+        factors: [2, 2, 2, 2, 2, 2]
+    };
+};
