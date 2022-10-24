@@ -17,6 +17,12 @@ describe.only('prime factors decomposition', () => {
                 factors: [2]
             });
         });
+        it('takes more work for 4', () => {
+            expect(primeFactorsOf({ number: 4 })).to.deep.equal({
+                number: 4,
+                factors: [2, 2]
+            });
+        });
     });
 });
 
@@ -32,6 +38,11 @@ const primeFactorsOf = (options) => {
     let factor = 2;
     if (number % factor === 0) {
         factors.push(factor);
+        number /= factor;
+    }
+    if (number % factor === 0) {
+        factors.push(factor);
+        number /= factor;
     }
     return {
         number: options.number,
