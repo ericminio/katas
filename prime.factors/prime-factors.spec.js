@@ -27,12 +27,6 @@ describe.only('prime factors decomposition', () => {
 });
 
 const primeFactorsOf = (options) => {
-    if (options.number == 64) {
-        return {
-            number: options.number,
-            factors: [2, 2, 2, 2, 2, 2]
-        };
-    }
     let number = options.number;
     let factors = [];
     let factor = 2;
