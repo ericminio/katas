@@ -36,13 +36,11 @@ const primeFactorsOf = (options) => {
     let number = options.number;
     let factors = [];
     let factor = 2;
-    if (number % factor === 0) {
-        factors.push(factor);
-        number /= factor;
-    }
-    if (number % factor === 0) {
-        factors.push(factor);
-        number /= factor;
+    while (number > 1) {
+        if (number % factor === 0) {
+            factors.push(factor);
+            number /= factor;
+        }
     }
     return {
         number: options.number,
