@@ -12,7 +12,7 @@
             element('#compute').addEventListener('click', compute);
         };
         const compute = () => {
-            let number = element('#number').value;
+            let number = parseInt(element('#number').value);
             let decomposition = primeFactorsOf(number);
             element('#decomposition').innerHTML = decomposition.join(' x ');
         };

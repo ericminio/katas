@@ -1,3 +1,14 @@
 const primeFactorsOf = (number) => {
-    return [2, 3, 7];
+    let factors = [];
+    let factor = 2;
+
+    while (number > 1) {
+        while (number % factor === 0) {
+            factors.push(factor);
+            number /= factor;
+        }
+        factor++;
+    }
+
+    return factors;
 };
