@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { eventually, page } from '../yop/lib/index.js';
 
-describe.only('Home page', () => {
+describe('Home page', () => {
 
     beforeEach(async () => {
         await page.open('./prime.factors.web/index.html');
