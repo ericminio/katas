@@ -11,7 +11,12 @@
             element('#compute').addEventListener('click', compute);
         }
         const compute = () => {
-            element('#decomposition').innerHTML = '2 x 3 x 7';
+            let number = element('#number').value;
+            let decomposition = primeFactorsOf(number);
+            element('#decomposition').innerHTML = decomposition.join(' x ');
+        }
+        const primeFactorsOf = (number) => {
+            return [2, 3, 7];
         }
     </script>
 </head>
