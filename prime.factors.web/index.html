@@ -3,21 +3,19 @@
 <html lang="en">
 
 <head>
+    <script type="application/javascript" src="./prime-factors.js"></script>
     <script>
         const element = (selector) => {
             return document.querySelector(selector);
-        }
+        };
         const addEventListeners = () => {
             element('#compute').addEventListener('click', compute);
-        }
+        };
         const compute = () => {
             let number = element('#number').value;
             let decomposition = primeFactorsOf(number);
             element('#decomposition').innerHTML = decomposition.join(' x ');
-        }
-        const primeFactorsOf = (number) => {
-            return [2, 3, 7];
-        }
+        };
     </script>
 </head>
 
