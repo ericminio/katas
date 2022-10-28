@@ -2,15 +2,33 @@
 
 <html lang="en">
 
+<head>
+    <script>
+        const element = (selector) => {
+            return document.querySelector(selector);
+        }
+        const addEventListeners = () => {
+            element('#compute').addEventListener('click', compute);
+        }
+        const compute = () => {
+            element('#decomposition').innerHTML = '2 x 3 x 7';
+        }
+    </script>
+</head>
+
 <body>
     <label for="number">Number to decompose</label>
     <input id="number" />
-    <button>compute</button>
+    <button id="compute">compute</button>
 
     <section>
         <h1>Results</h1>
-        <label>2 x 3 x 7</label>
+        <label id="decomposition"></label>
     </section>
+
+    <script>
+        addEventListeners();
+    </script>
 </body>
 
 </html>
