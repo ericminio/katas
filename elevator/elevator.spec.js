@@ -1,25 +1,25 @@
-let { expect } = require('chai')
-let { Elevator } = require('./elevator')
+import { expect } from 'chai';
+import { Elevator } from './elevator.js';
 
-describe('elevator', ()=>{
+describe('elevator', () => {
 
     let elevator
-    beforeEach(()=>{
+    beforeEach(() => {
         elevator = new Elevator()
     })
-    it('starts on the ground', ()=>{
+    it('starts on the ground', () => {
         expect(elevator.floor).to.equal(0)
     })
-    it('starts by waiting', ()=>{
+    it('starts by waiting', () => {
         expect(elevator.state).to.equal('waiting')
     })
-    it('records calls', ()=>{
+    it('records calls', () => {
         elevator.calledFrom(2)
         elevator.calledFrom(4)
 
         expect(elevator.ups).to.deep.equal([2, 4])
     })
-    it('distinguishes direction', ()=>{
+    it('distinguishes direction', () => {
         elevator.floor = 4
         elevator.calledFrom(10)
         elevator.calledFrom(8)
@@ -29,35 +29,35 @@ describe('elevator', ()=>{
         expect(elevator.ups).to.deep.equal([10, 8])
         expect(elevator.downs).to.deep.equal([1, 0])
     })
-    it('will go up when first call is above current', ()=>{
+    it('will go up when first call is above current', () => {
         elevator.floor = 4
         elevator.calledFrom(10)
         elevator.calledFrom(1)
 
         expect(elevator.state).to.equal('up')
     })
-    it('will go down when first call is below current', ()=>{
+    it('will go down when first call is below current', () => {
         elevator.floor = 4
         elevator.calledFrom(1)
         elevator.calledFrom(10)
 
         expect(elevator.state).to.equal('down')
     })
-    it('can move up', ()=>{
+    it('can move up', () => {
         elevator.floor = 4
         elevator.calledFrom(6)
         elevator.move()
 
         expect(elevator.floor).to.equal(5)
     })
-    it('can move down', ()=>{
+    it('can move down', () => {
         elevator.floor = 4
         elevator.calledFrom(0)
         elevator.move()
 
         expect(elevator.floor).to.equal(3)
     })
-    it('moves until waiting', ()=>{
+    it('moves until waiting', () => {
         elevator.floor = 4
         elevator.calledFrom(2)
 
@@ -75,7 +75,7 @@ describe('elevator', ()=>{
         expect(elevator.downs).to.deep.equal([])
         expect(elevator.state).to.equal('waiting')
     })
-    it('clears both directions', ()=>{
+    it('clears both directions', () => {
         elevator.floor = 4
         elevator.calledFrom(2)
         elevator.calledFrom(5)
@@ -106,7 +106,7 @@ describe('elevator', ()=>{
         expect(elevator.ups).to.deep.equal([])
         expect(elevator.state).to.equal('waiting')
     })
-    it('ignores calls from current floor', ()=>{
+    it('ignores calls from current floor', () => {
         elevator.calledFrom(0)
         expect(elevator.downs).to.deep.equal([])
         expect(elevator.ups).to.deep.equal([])
@@ -114,9 +114,9 @@ describe('elevator', ()=>{
         elevator.move()
         expect(elevator.floor).to.equal(0)
     })
-    it('dings', ()=>{
+    it('dings', () => {
         let dings = []
-        elevator.listener = (floor)=>{
+        elevator.listener = (floor) => {
             dings.push(floor)
         }
         elevator.calledFrom(2)
@@ -124,17 +124,17 @@ describe('elevator', ()=>{
         elevator.move()
         expect(dings).to.deep.equal([2])
     })
-    it('dings immediatly when already there', ()=>{
+    it('dings immediatly when already there', () => {
         let dings = []
-        elevator.listener = (floor)=>{
+        elevator.listener = (floor) => {
             dings.push(floor)
         }
         elevator.calledFrom(0)
         expect(dings).to.deep.equal([0])
     })
-    it('accept floor request', ()=>{
+    it('accept floor request', () => {
         let dings = []
-        elevator.listener = (floor)=>{
+        elevator.listener = (floor) => {
             dings.push(floor)
         }
         elevator.calledFrom(1)
@@ -145,9 +145,9 @@ describe('elevator', ()=>{
         expect(elevator.floor).to.equal(2)
         expect(dings).to.deep.equal([1, 2])
     })
-    it('accept interupting floor request', ()=>{
+    it('accept interupting floor request', () => {
         let dings = []
-        elevator.listener = (floor)=>{
+        elevator.listener = (floor) => {
             dings.push(floor)
         }
         elevator.calledFrom(4)
@@ -161,9 +161,9 @@ describe('elevator', ()=>{
         expect(elevator.floor).to.equal(4)
         expect(dings).to.deep.equal([2, 3, 4])
     })
-    it('postpone too-late floor request', ()=>{
+    it('postpone too-late floor request', () => {
         let dings = []
-        elevator.listener = (floor)=>{
+        elevator.listener = (floor) => {
             dings.push(floor)
         }
         elevator.calledFrom(4)
@@ -180,7 +180,7 @@ describe('elevator', ()=>{
         expect(elevator.floor).to.equal(1)
         expect(dings).to.deep.equal([2, 4, 1])
     })
-    it('ignores floor request to current floor', ()=>{
+    it('ignores floor request to current floor', () => {
         elevator.request(0)
         expect(elevator.downs).to.deep.equal([])
         expect(elevator.ups).to.deep.equal([])
@@ -188,9 +188,9 @@ describe('elevator', ()=>{
         elevator.move()
         expect(elevator.floor).to.equal(0)
     })
-    it('ignores floor request to current floor, but still dings!', ()=>{
+    it('ignores floor request to current floor, but still dings!', () => {
         let dings = []
-        elevator.listener = (floor)=>{
+        elevator.listener = (floor) => {
             dings.push(floor)
         }
         elevator.request(0)

@@ -1,16 +1,16 @@
-class Elevator {
+export class Elevator {
     constructor() {
         this.floor = 0
         this.state = 'waiting'
         this.ups = []
         this.downs = []
-        this.listener = ()=>{}
+        this.listener = () => { }
     }
     ding() {
         this.listener(this.floor)
     }
     calledFrom(floor) {
-        this.request(floor)    
+        this.request(floor)
     }
     request(floor) {
         if (floor > this.floor) {
@@ -20,10 +20,10 @@ class Elevator {
         else if (floor < this.floor) {
             this.downs.push(floor)
             if (this.state == 'waiting') { this.state = 'down' }
-        }   
+        }
         else {
             this.ding()
-        } 
+        }
     }
     move() {
         if (this.state == 'waiting') { return }
@@ -49,10 +49,6 @@ class Elevator {
         }
         if (this.downs.length != 0 && this.ups.length == 0) {
             this.state = 'down'
-        } 
+        }
     }
-}
-
-module.exports = {
-    Elevator
-}
+};

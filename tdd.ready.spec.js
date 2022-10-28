@@ -1,8 +1,8 @@
-let { expect } = require('chai')
+import { expect } from 'chai'
 
-describe('environment', ()=>{
+describe('environment', () => {
 
-    it('is ready', ()=>{
-        expect(1+1).to.equal(2)
+    it('is ready', () => {
+        expect(1 + 1).to.equal(2)
     })
 })
